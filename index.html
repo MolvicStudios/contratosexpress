@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>ContratosExpress.pro — Generador de Contratos y Acuerdos con IA | Gratis</title>
+  <meta name="description" content="Genera contratos de servicios, NDA, freelance, arrendamiento y más en minutos. 8 tipos de contrato, bilingüe ES/EN, con IA o sin conexión. Gratis, sin registro. Por MolvicStudios.">
+  <meta name="keywords" content="generador de contratos gratis, plantilla contrato de servicios, contrato freelance, NDA plantilla, contrato de arrendamiento, contract generator, service agreement template, MolvicStudios, contratos con IA">
+  <meta name="author" content="MolvicStudios">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <link rel="canonical" href="https://contratosexpress.pro/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://contratosexpress.pro/">
+  <meta property="og:title" content="ContratosExpress.pro — Generador de Contratos con IA">
+  <meta property="og:description" content="Contratos profesionales en minutos. 8 tipos, bilingüe, gratis.">
+  <meta property="og:image" content="https://contratosexpress.pro/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="ContratosExpress.pro by MolvicStudios">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:locale:alternate" content="en_US">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ContratosExpress.pro — Generador de Contratos con IA">
+  <meta name="twitter:description" content="Contratos profesionales en minutos. Gratis, bilingüe, sin registro.">
+  <meta name="twitter:image" content="https://contratosexpress.pro/og-image.png">
+
+  <meta name="google-adsense-account" content="ca-pub-1513893788851225">
+  <meta name="theme-color" content="#08080a">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "ContratosExpress.pro",
+    "alternateName": "ContratosExpress.pro by MolvicStudios",
+    "url": "https://contratosexpress.pro/",
+    "description": "Generador de contratos y acuerdos de servicio profesionales con IA. 8 tipos de contrato, bilingüe ES/EN, gratis.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "creator": { "@type": "Organization", "name": "MolvicStudios", "url": "https://molvicstudios.com/" },
+    "inLanguage": ["es", "en"],
+    "featureList": [
+      "8 contract types: services, NDA, freelance, rental, employment, partnership, sales, custom",
+      "Online mode with Groq AI (Llama 3.3)",
+      "Offline mode with professional templates",
+      "Bilingual (Spanish / English)",
+      "Optional clauses: confidentiality, non-compete, IP, dispute resolution",
+      "History and favorites",
+      "Real-time live preview",
+      "Auto-save drafts",
+      "Custom logo upload for document header"
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<noscript>
+  <div class="noscript-msg">
+    ContratosExpress.pro requiere JavaScript para funcionar. Por favor, activa JavaScript en tu navegador. / ContratosExpress.pro requires JavaScript to work. Please enable JavaScript in your browser.
+  </div>
+</noscript>
+
+<!-- ── NAVBAR ──────────────────────────────────────────────────────────── -->
+<nav class="navbar" role="navigation" aria-label="Navegación principal">
+  <div class="container">
+    <div class="navbar-inner">
+      <a href="/" class="navbar-brand" aria-label="ContratosExpress.pro inicio">
+        <span class="navbar-brand-name">Contratos<span>Express</span>.pro</span>
+        <span class="navbar-by" data-t="nav.byMolvic">by MolvicStudios</span>
+      </a>
+      <div class="navbar-actions">
+        <button class="btn btn-ghost btn-nav-history" id="btn-history" aria-label="Historial de contratos">
+          <span data-t="nav.history">📜 Historial</span>
+        </button>
+        <button class="btn btn-ghost btn-nav-favorites" id="btn-favorites" aria-label="Contratos favoritos">
+          <span data-t="nav.favorites">⭐ Favoritos</span>
+        </button>
+        <button class="btn-lang" id="btn-lang" aria-label="Cambiar idioma">EN</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ────────────────────────────────────────────────────────────── -->
+<header class="hero" id="hero">
+  <div class="container">
+    <div class="hero-badge anim-fade-up">
+      <span data-t="hero.badge">Potenciado por Groq · Llama 3.3 · 100% gratuito</span>
+    </div>
+    <h1 class="hero-title anim-fade-up anim-delay-1">
+      Generador de <span>Contratos</span> y Acuerdos con IA
+    </h1>
+    <p class="hero-subtitle anim-fade-up anim-delay-2" data-t="hero.subtitle">
+      Contratos profesionales en minutos. 8 tipos de contrato, bilingüe, gratis, sin registro.
+    </p>
+    <div class="hero-cta anim-fade-up anim-delay-3">
+      <button class="btn btn-primary btn-lg" id="btn-hero-cta">
+        <span data-t="hero.cta">Generar mi contrato</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+
+    <!-- ── CONTRACT TYPES ────────────────────────────────────────────── -->
+    <section id="contract-types-section" aria-labelledby="contract-types-title">
+      <h2 class="section-title" id="contract-types-title" data-t="contractTypes.title">Tipo de Contrato</h2>
+      <p class="section-subtitle" data-t="contractTypes.subtitle">Selecciona el tipo de documento que necesitas generar</p>
+      <div class="contract-grid" id="contract-grid" role="list" aria-label="Tipos de contrato">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ── MODE SELECTOR ─────────────────────────────────────────────── -->
+    <section id="mode-section" aria-labelledby="mode-title">
+      <h2 class="section-title" id="mode-title" data-t="mode.title">Selecciona el modo de generación</h2>
+
+      <div class="mode-grid">
+        <!-- Online -->
+        <div class="mode-card" id="mode-online" role="radio" aria-checked="false" tabindex="0">
+          <div class="mode-card-header">
+            <div class="mode-radio"></div>
+            <div class="mode-card-title" data-t="mode.online">Modo Online — Groq AI</div>
+          </div>
+          <div class="mode-card-desc" data-t="mode.onlineDesc">Contrato único generado con inteligencia artificial</div>
+        </div>
+        <!-- Offline -->
+        <div class="mode-card selected" id="mode-offline" role="radio" aria-checked="true" tabindex="0">
+          <div class="mode-card-header">
+            <div class="mode-radio"></div>
+            <div class="mode-card-title" data-t="mode.offline">Modo Offline — Plantillas</div>
+          </div>
+          <div class="mode-card-desc" data-t="mode.offlineDesc">100% en tu navegador, sin llamadas de red</div>
+        </div>
+      </div>
+
+      <!-- API Key Panel -->
+      <div class="api-key-panel hidden-panel" id="api-key-panel">
+        <label class="field-label" for="api-key-input" data-t="mode.apiKeyLabel">Tu API Key de Groq</label>
+        <div class="api-key-row">
+          <input
+            type="password"
+            id="api-key-input"
+            placeholder="gsk_..."
+            autocomplete="off"
+            spellcheck="false"
+            aria-label="API Key de Groq"
+          >
+          <button class="btn btn-ghost" id="btn-show-key" type="button" title="Mostrar/ocultar key" aria-label="Mostrar u ocultar API key">👁</button>
+          <a href="https://console.groq.com/keys" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" data-t="mode.apiKeyHelp">Obtén tu key gratis →</a>
+        </div>
+        <p class="api-key-note" data-t="mode.apiKeyNote">Tu key nunca se envía a nuestros servidores. Se guarda en sessionStorage del navegador.</p>
+
+        <details class="faq-details" id="faq-groq">
+          <summary class="faq-summary" data-t="mode.faqTitle">¿Qué es la API de Groq? ▾</summary>
+          <div class="faq-body">
+            <p data-t="mode.faqIntro">Groq ofrece acceso gratuito a modelos de IA de última generación. Sigue estos pasos:</p>
+            <ol>
+              <li data-t="mode.faqStep1">1. Ve a console.groq.com/keys y crea una cuenta gratis</li>
+              <li data-t="mode.faqStep2">2. Crea una API Key (empieza con gsk_)</li>
+              <li data-t="mode.faqStep3">3. Pégala en el campo de arriba — se guarda solo en tu navegador</li>
+              <li data-t="mode.faqStep4">4. Listo, genera contratos con IA de forma gratuita</li>
+            </ol>
+          </div>
+        </details>
+      </div>
+
+      <div style="margin-top: 24px; text-align: center;">
+        <button class="btn btn-primary btn-lg" id="btn-continue-mode" data-t="mode.continueBtn">
+          Ir al formulario ↓
+        </button>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ── WIZARD ─────────────────────────────────────────────────────── -->
+    <section id="wizard-section" aria-labelledby="wizard-title">
+      <h2 class="section-title" id="wizard-title" style="margin-bottom: var(--space-lg)">
+        <span data-t="wizard.step1">Las Partes</span>
+      </h2>
+
+      <!-- Progress Bar -->
+      <div class="progress-bar-wrap" aria-label="Progreso del formulario">
+        <div class="progress-bar-steps">
+          <div class="progress-step active" data-t="wizard.step1">Las Partes</div>
+          <div class="progress-step" data-t="wizard.step2">Objeto</div>
+          <div class="progress-step" data-t="wizard.step3">Económico</div>
+          <div class="progress-step" data-t="wizard.step4">Cláusulas</div>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" id="progress-bar-fill" style="width:25%"></div>
+        </div>
+        <div class="progress-label" id="progress-label">Paso 1 de 4</div>
+      </div>
+
+      <!-- ─ STEP 1: Las Partes ─ -->
+      <div class="wizard-step active" id="step-1">
+        <div class="step-header">
+          <h3 class="section-title" data-t="step1.title">Las Partes</h3>
+          <p class="section-subtitle" data-t="step1.subtitle">Datos de las dos partes del contrato</p>
+        </div>
+
+        <!-- Primera Parte -->
+        <div class="form-card">
+          <div class="form-card-title" data-t="step1.party1Title">Primera Parte — Tú o tu empresa</div>
+
+          <div class="field">
+            <label class="field-label" for="field-party1-name">
+              <span data-t="step1.nameLabel">Nombre completo o razón social</span>
+              <span class="req">*</span>
+            </label>
+            <input class="field-input" id="field-party1-name" type="text"
+              data-t-placeholder="step1.namePlaceholder"
+              placeholder="Ana García López / Empresa ABC S.L."
+              required autocomplete="name">
+          </div>
+
+          <div class="field">
+            <label class="field-label" data-t="step1.typeLabel">Tipo de persona</label>
+            <div class="type-toggle" id="type-toggle-party1">
+              <button class="type-btn active" id="btn-party1-person" type="button" data-t="step1.typePerson">Persona física</button>
+              <button class="type-btn" id="btn-party1-company" type="button" data-t="step1.typeCompany">Empresa / Persona jurídica</button>
+            </div>
+            <input type="hidden" id="field-party1-type" value="person">
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="field-label" for="field-party1-taxid" data-t="step1.taxIdLabel">Identificación fiscal / NIF</label>
+              <input class="field-input" id="field-party1-taxid" type="text"
+                data-t-placeholder="step1.taxIdPlaceholder"
+                placeholder="NIF, CIF, RFC, RUT, EIN...">
+            </div>
+            <div class="field">
+              <label class="field-label" for="field-party1-email" data-t="step1.emailLabel">Correo electrónico</label>
+              <input class="field-input" id="field-party1-email" type="email"
+                data-t-placeholder="step1.emailPlaceholder"
+                placeholder="nombre@empresa.com" autocomplete="email">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="field-party1-address" data-t="step1.addressLabel">Dirección</label>
+            <input class="field-input" id="field-party1-address" type="text"
+              data-t-placeholder="step1.addressPlaceholder"
+              placeholder="Calle, número, ciudad, país">
+          </div>
+        </div>
+
+        <!-- Segunda Parte -->
+        <div class="form-card">
+          <div class="form-card-title" data-t="step1.party2Title">Segunda Parte — La contraparte</div>
+
+          <div class="field">
+            <label class="field-label" for="field-party2-name">
+              <span data-t="step1.nameLabel">Nombre completo o razón social</span>
+              <span class="req">*</span>
+            </label>
+            <input class="field-input" id="field-party2-name" type="text"
+              data-t-placeholder="step1.namePlaceholder"
+              placeholder="Juan Pérez / Empresa XYZ Ltd."
+              required autocomplete="off">
+          </div>
+
+          <div class="field">
+            <label class="field-label" data-t="step1.typeLabel">Tipo de persona</label>
+            <div class="type-toggle" id="type-toggle-party2">
+              <button class="type-btn active" id="btn-party2-person" type="button" data-t="step1.typePerson">Persona física</button>
+              <button class="type-btn" id="btn-party2-company" type="button" data-t="step1.typeCompany">Empresa / Persona jurídica</button>
+            </div>
+            <input type="hidden" id="field-party2-type" value="person">
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="field-label" for="field-party2-taxid" data-t="step1.taxIdLabel">Identificación fiscal / NIF</label>
+              <input class="field-input" id="field-party2-taxid" type="text"
+                data-t-placeholder="step1.taxIdPlaceholder"
+                placeholder="NIF, CIF, RFC, RUT, EIN...">
+            </div>
+            <div class="field">
+              <label class="field-label" for="field-party2-email" data-t="step1.emailLabel">Correo electrónico</label>
+              <input class="field-input" id="field-party2-email" type="email"
+                data-t-placeholder="step1.emailPlaceholder"
+                placeholder="nombre@empresa.com" autocomplete="off">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="field-party2-address" data-t="step1.addressLabel">Dirección</label>
+            <input class="field-input" id="field-party2-address" type="text"
+              data-t-placeholder="step1.addressPlaceholder"
+              placeholder="Calle, número, ciudad, país">
+          </div>
+        </div>
+
+        <div class="wizard-nav">
+          <div></div>
+          <div class="wizard-nav-right">
+            <div class="autosave-indicator" id="autosave-indicator">
+              <span class="autosave-dot"></span>
+              <span data-t="wizard.autoSaved">Borrador guardado</span>
+            </div>
+            <button class="btn btn-primary" id="btn-next-1" type="button">
+              <span data-t="wizard.next">Siguiente →</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─ STEP 2: Objeto ─ -->
+      <div class="wizard-step" id="step-2">
+        <div class="step-header">
+          <h3 class="section-title" data-t="step2.title">Objeto del Contrato</h3>
+          <p class="section-subtitle" data-t="step2.subtitle">Describe detalladamente qué se acuerda en este contrato</p>
+        </div>
+
+        <div class="form-card">
+          <div class="field">
+            <label class="field-label" for="field-desc">
+              <span data-t="step2.descLabel">Descripción del servicio u objeto del contrato</span>
+              <span class="req">*</span>
+            </label>
+            <textarea class="field-textarea" id="field-desc" rows="5"
+              data-t-placeholder="step2.descPlaceholder"
+              placeholder="Describe el servicio, producto o acuerdo principal..." maxlength="600" required></textarea>
+            <div class="char-counter" id="field-desc-counter">600 caracteres restantes</div>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="field-deliverables" data-t="step2.deliverablesLabel">Entregables o alcance específico</label>
+            <textarea class="field-textarea" id="field-deliverables" rows="3"
+              data-t-placeholder="step2.deliverablesPlaceholder"
+              placeholder="¿Qué se entrega exactamente?"></textarea>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="field-exclusions" data-t="step2.exclusionsLabel">Exclusiones (opcional)</label>
+            <textarea class="field-textarea" id="field-exclusions" rows="2"
+              data-t-placeholder="step2.exclusionsPlaceholder"
+              placeholder="¿Qué NO incluye este contrato?"></textarea>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="field-label" for="field-start-date" data-t="step2.startDateLabel">Fecha de inicio</label>
+              <input class="field-input" id="field-start-date" type="date">
+            </div>
+            <div class="field">
+              <label class="field-label" for="field-duration" data-t="step2.durationLabel">Fecha de fin o duración</label>
+              <input class="field-input" id="field-duration" type="text"
+                data-t-placeholder="step2.durationPlaceholder"
+                placeholder="Ej: 6 meses · 1 año · indefinido">
+            </div>
+          </div>
+        </div>
+
+        <div class="wizard-nav">
+          <button class="btn btn-secondary" id="btn-back-2" type="button" data-t="wizard.back">← Atrás</button>
+          <div class="wizard-nav-right">
+            <div class="autosave-indicator">
+              <span class="autosave-dot"></span>
+              <span data-t="wizard.autoSaved">Borrador guardado</span>
+            </div>
+            <button class="btn btn-primary" id="btn-next-2" type="button">
+              <span data-t="wizard.next">Siguiente →</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─ STEP 3: Económico ─ -->
+      <div class="wizard-step" id="step-3">
+        <div class="step-header">
+          <h3 class="section-title" data-t="step3.title">Condiciones Económicas</h3>
+          <p class="section-subtitle" data-t="step3.subtitle">Precio, forma de pago y penalizaciones</p>
+        </div>
+
+        <div class="form-card">
+          <div class="field-row">
+            <div class="field">
+              <label class="field-label" for="field-price">
+                <span data-t="step3.priceLabel">Precio o compensación total</span>
+                <span class="req">*</span>
+              </label>
+              <input class="field-input" id="field-price" type="text"
+                data-t-placeholder="step3.pricePlaceholder"
+                placeholder="Ej: $5,000 · €3,000/mes" required>
+            </div>
+            <div class="field">
+              <label class="field-label" for="field-currency" data-t="step3.currencyLabel">Moneda</label>
+              <select class="field-select" id="field-currency">
+                <option value="USD">USD — Dólar estadounidense</option>
+                <option value="EUR" selected>EUR — Euro</option>
+                <option value="MXN">MXN — Peso mexicano</option>
+                <option value="COP">COP — Peso colombiano</option>
+                <option value="ARS">ARS — Peso argentino</option>
+                <option value="CLP">CLP — Peso chileno</option>
+                <option value="PEN">PEN — Sol peruano</option>
+                <option value="GBP">GBP — Libra esterlina</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="field-payment-type" data-t="step3.paymentTypeLabel">Forma de pago</label>
+            <select class="field-select" id="field-payment-type">
+              <option value="single_start" data-t-opt="step3.paymentTypes.single_start">Pago único al inicio del contrato</option>
+              <option value="single_end"   data-t-opt="step3.paymentTypes.single_end">Pago único al finalizar el trabajo</option>
+              <option value="split_50"     data-t-opt="step3.paymentTypes.split_50">50% de anticipo + 50% al finalizar</option>
+              <option value="monthly"      data-t-opt="step3.paymentTypes.monthly">Pagos mensuales</option>
+              <option value="milestones"   data-t-opt="step3.paymentTypes.milestones">Por hitos o entregables</option>
+              <option value="custom"       data-t-opt="step3.paymentTypes.custom">Personalizado</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="field-payment-method" data-t="step3.paymentMethodLabel">Método de pago (opcional)</label>
+            <input class="field-input" id="field-payment-method" type="text"
+              data-t-placeholder="step3.paymentMethodPlaceholder"
+              placeholder="Transferencia bancaria, PayPal, Stripe...">
+          </div>
+
+          <div class="field">
+            <div class="penalty-row">
+              <label>
+                <input type="checkbox" class="clause-checkbox" id="check-late-penalty">
+                <span data-t="step3.latePenaltyLabel">Penalización por retraso en pagos</span>
+              </label>
+            </div>
+            <div id="late-penalty-input-wrap" style="display:none">
+              <input class="field-input" id="field-late-penalty" type="text"
+                data-t-placeholder="step3.latePenaltyPlaceholder"
+                placeholder="Ej: interés del 1,5% mensual sobre el saldo pendiente">
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="field-breach-penalty" data-t="step3.breachPenaltyLabel">Penalización por incumplimiento (opcional)</label>
+            <textarea class="field-textarea" id="field-breach-penalty" rows="2"
+              data-t-placeholder="step3.breachPenaltyPlaceholder"
+              placeholder="Ej: indemnización equivalente al 20% del valor total..."></textarea>
+          </div>
+        </div>
+
+        <div class="wizard-nav">
+          <button class="btn btn-secondary" id="btn-back-3" type="button" data-t="wizard.back">← Atrás</button>
+          <div class="wizard-nav-right">
+            <div class="autosave-indicator">
+              <span class="autosave-dot"></span>
+              <span data-t="wizard.autoSaved">Borrador guardado</span>
+            </div>
+            <button class="btn btn-primary" id="btn-next-3" type="button">
+              <span data-t="wizard.next">Siguiente →</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─ STEP 4: Cláusulas ─ -->
+      <div class="wizard-step" id="step-4">
+        <div class="step-header">
+          <h3 class="section-title" data-t="step4.title">Cláusulas y Opciones</h3>
+          <p class="section-subtitle" data-t="step4.subtitle">Personaliza las cláusulas legales y el tono del documento</p>
+        </div>
+
+        <div class="form-card">
+          <div class="field">
+            <label class="field-label" for="field-jurisdiction" data-t="step4.jurisdictionLabel">Jurisdicción / Ley aplicable</label>
+            <input class="field-input" id="field-jurisdiction" type="text"
+              data-t-placeholder="step4.jurisdictionPlaceholder"
+              placeholder="Ej: Leyes de España · México · Colombia · Argentina">
+          </div>
+        </div>
+
+        <div class="form-card">
+          <div class="form-card-title" data-t="step4.clausesTitle">Cláusulas adicionales (todas opcionales)</div>
+
+          <div class="clause-item">
+            <label class="clause-label">
+              <input class="clause-checkbox" type="checkbox" id="check-confidentiality">
+              <span class="clause-text" data-t="step4.confidentiality">Cláusula de Confidencialidad (NDA integrado)</span>
+            </label>
+          </div>
+
+          <div class="clause-item">
+            <label class="clause-label">
+              <input class="clause-checkbox" type="checkbox" id="check-non-compete">
+              <span class="clause-text" data-t="step4.nonCompete">Cláusula de No Competencia</span>
+            </label>
+            <div class="clause-extra" id="non-compete-extra">
+              <label class="field-label" for="field-non-compete-period" data-t="step4.nonCompetePeriodLabel">Duración de la no competencia</label>
+              <input class="field-input" id="field-non-compete-period" type="text"
+                data-t-placeholder="step4.nonCompetePeriodPlaceholder"
+                placeholder="Ej: 12 meses · 2 años">
+            </div>
+          </div>
+
+          <div class="clause-item">
+            <label class="clause-label">
+              <input class="clause-checkbox" type="checkbox" id="check-ip-rights">
+              <span class="clause-text" data-t="step4.ipRights">Cláusula de Propiedad Intelectual (quién retiene los derechos)</span>
+            </label>
+          </div>
+
+          <div class="clause-item">
+            <label class="clause-label">
+              <input class="clause-checkbox" type="checkbox" id="check-dispute-resolution">
+              <span class="clause-text" data-t="step4.disputeResolution">Cláusula de Resolución de Disputas</span>
+            </label>
+          </div>
+
+          <div class="clause-item">
+            <label class="clause-label">
+              <input class="clause-checkbox" type="checkbox" id="check-early-termination">
+              <span class="clause-text" data-t="step4.earlyTermination">Cláusula de Terminación Anticipada</span>
+            </label>
+            <div class="clause-extra" id="early-termination-extra">
+              <label class="field-label" for="field-early-termination-notice" data-t="step4.earlyTerminationNoticeLabel">Plazo de preaviso</label>
+              <input class="field-input" id="field-early-termination-notice" type="text"
+                data-t-placeholder="step4.earlyTerminationNoticePlaceholder"
+                placeholder="Ej: 30 días · 15 días">
+            </div>
+          </div>
+
+          <div class="clause-item">
+            <label class="clause-label">
+              <input class="clause-checkbox" type="checkbox" id="check-force-majeure">
+              <span class="clause-text" data-t="step4.forceMajeure">Cláusula de Fuerza Mayor</span>
+            </label>
+          </div>
+
+          <div class="clause-item">
+            <label class="clause-label">
+              <input class="clause-checkbox" type="checkbox" id="check-data-protection">
+              <span class="clause-text" data-t="step4.dataProtection">Cláusula de Protección de Datos Personales</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="form-card">
+          <div class="form-card-title" data-t="step4.toneTitle">Tono del contrato</div>
+          <div class="tone-toggle" role="group" aria-label="Tono del contrato">
+            <button class="tone-btn" data-tone="formal" type="button" data-t="step4.toneFormal">Formal</button>
+            <button class="tone-btn active" data-tone="standard" type="button" data-t="step4.toneStandard">Estándar</button>
+            <button class="tone-btn" data-tone="simple" type="button" data-t="step4.toneSimple">Simplificado</button>
+          </div>
+          <input type="hidden" id="field-tone" value="standard">
+        </div>
+
+        <div class="form-card">
+          <div class="field">
+            <label class="field-label" for="field-notes" data-t="step4.notesLabel">Notas adicionales (opcional)</label>
+            <textarea class="field-textarea" id="field-notes" rows="3"
+              data-t-placeholder="step4.notesPlaceholder"
+              placeholder="Condiciones especiales, instrucciones adicionales..."></textarea>
+          </div>
+        </div>
+
+        <!-- ─ LOGO UPLOAD SECTION ─ -->
+        <div class="logo-section">
+          <div class="logo-section-title" data-t="step4.logoTitle">Logo del documento (opcional)</div>
+          <div class="logo-section-subtitle" data-t="step4.logoSubtitle">Aparecerá en la cabecera de la vista previa del contrato</div>
+
+          <div class="logo-options">
+            <!-- Dropzone -->
+            <div class="logo-dropzone" id="logo-dropzone" role="button" tabindex="0" aria-label="Subir logo">
+              <input type="file" class="logo-file-input" id="logo-file-input"
+                accept="image/png,image/jpeg,image/jpg,image/svg+xml,image/webp"
+                aria-label="Seleccionar archivo de logo">
+              <div class="logo-dropzone-icon">🖼️</div>
+              <div class="logo-dropzone-hint" data-t="step4.logoDragHint">Arrastra una imagen aquí o haz clic para seleccionar</div>
+              <div class="logo-dropzone-formats" data-t="step4.logoFormats">PNG, JPG, SVG, WebP · máx. 2 MB</div>
+            </div>
+
+            <!-- Preview -->
+            <div class="logo-preview-wrap" id="logo-preview-wrap">
+              <img class="logo-preview-img" id="logo-preview-img" src="" alt="Logo del contrato">
+              <div class="logo-preview-name" id="logo-preview-name"></div>
+              <button class="btn-logo-remove" id="btn-logo-remove" type="button" data-t="step4.logoRemove">Quitar logo</button>
+            </div>
+
+            <!-- No logo option -->
+            <div class="logo-no-logo selected" id="logo-no-logo" role="button" tabindex="0" aria-label="Sin logo">
+              <div class="logo-no-logo-icon">📄</div>
+              <div class="logo-no-logo-text" data-t="step4.logoNoLogo">Sin logo — solo texto</div>
+            </div>
+          </div>
+
+          <div class="logo-error" id="logo-error"></div>
+        </div>
+
+        <div class="wizard-nav">
+          <button class="btn btn-secondary" id="btn-back-4" type="button" data-t="wizard.back">← Atrás</button>
+          <div class="wizard-nav-right">
+            <div class="autosave-indicator">
+              <span class="autosave-dot"></span>
+              <span data-t="wizard.autoSaved">Borrador guardado</span>
+            </div>
+            <button class="btn btn-primary btn-lg" id="btn-generate" type="button">
+              <span data-t="wizard.generate">Generar Contrato</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── LIVE PREVIEW ─────────────────────────────────────────────────── -->
+    <section id="preview-section" aria-labelledby="preview-title">
+      <div class="preview-header">
+        <h2 class="section-title" id="preview-title" data-t="preview.title">👁 Vista Previa en tiempo real</h2>
+        <div class="preview-label-tag">
+          <span>●</span>
+          <span data-t="preview.previewLabel">Vista previa (borrador)</span>
+        </div>
+      </div>
+      <div class="preview-content">
+        <div class="preview-logo-header" id="preview-logo-header">
+          <img id="preview-logo-img" src="" alt="Logo del contrato">
+        </div>
+        <div class="preview-placeholder" id="preview-placeholder" data-t="preview.placeholder">
+          La vista previa aparecerá aquí cuando rellenes el nombre de ambas partes y la descripción del contrato...
+        </div>
+        <pre class="preview-pre" id="preview-pre" style="display:none" aria-live="polite"></pre>
+      </div>
+    </section>
+
+    <hr class="divider">
+
+    <!-- ── RESULT SECTION ───────────────────────────────────────────────── -->
+    <section id="result-section" aria-labelledby="result-title" aria-live="polite">
+
+      <!-- Skeleton Loader -->
+      <div id="skeleton-loader" style="display:none">
+        <div class="result-doc">
+          <div class="skeleton-wrap">
+            <div class="skeleton-line short"></div>
+            <div class="skeleton-line medium"></div>
+            <div class="skeleton-line long"></div>
+            <div class="skeleton-line long"></div>
+            <div class="skeleton-line medium"></div>
+            <div class="skeleton-line long"></div>
+            <div class="skeleton-line short"></div>
+            <div class="skeleton-line long"></div>
+            <div class="skeleton-line medium"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Result Content -->
+      <div id="result-content">
+        <!-- Disclaimer Banner -->
+        <div class="disclaimer-banner" role="alert">
+          <div class="disclaimer-banner-icon">⚠️</div>
+          <div class="disclaimer-banner-text" id="result-disclaimer-text" data-t="result.disclaimer">
+            AVISO LEGAL: Este documento es una plantilla orientativa generada automáticamente. NO constituye asesoramiento legal profesional. Para contratos vinculantes, consulta siempre con un abogado colegiado en tu jurisdicción.
+          </div>
+        </div>
+
+        <!-- Header -->
+        <div class="result-header">
+          <div class="result-title-group">
+            <h2 class="result-title" id="result-title" data-t="result.title">Tu Contrato Generado</h2>
+            <div class="result-badge offline" id="result-badge">📄 Generado offline · Plantilla profesional</div>
+          </div>
+          <div class="result-actions">
+            <button class="btn btn-ghost" id="btn-favorite" type="button" data-t="result.favoriteAdd">☆ Añadir a favoritos</button>
+            <button class="btn btn-secondary" id="btn-copy" type="button" data-t="result.copyBtn">📋 Copiar</button>
+            <button class="btn btn-secondary" id="btn-download" type="button" data-t="result.downloadBtn">⬇ Descargar .txt</button>
+            <button class="btn btn-ghost" id="btn-regenerate" type="button" data-t="result.regenerateBtn">🔄 Regenerar</button>
+            <button class="btn btn-secondary" id="btn-new-contract" type="button" data-t="result.newContractBtn">✚ Nuevo contrato</button>
+          </div>
+        </div>
+
+        <!-- Document -->
+        <div class="result-doc" role="document" aria-label="Contrato generado">
+          <div class="result-doc-logo" id="result-doc-logo">
+            <img id="result-doc-logo-img" src="" alt="Logo del contrato">
+          </div>
+          <pre class="result-pre" id="result-pre"></pre>
+        </div>
+
+        <!-- Variants -->
+        <div class="variants-section">
+          <div class="variants-title" data-t="result.variantsTitle">Variantes</div>
+          <div class="variants-chips">
+            <button class="variant-chip" data-variant="protective" type="button" data-t="result.variantProtective">Más protector (para mí)</button>
+            <button class="variant-chip" data-variant="balanced" type="button" data-t="result.variantBalanced">Más equilibrado</button>
+            <button class="variant-chip" data-variant="simple" type="button" data-t="result.variantSimple">Más simple</button>
+            <button class="variant-chip" data-variant="penal" type="button" data-t="result.variantPenal">Añadir cláusula penal</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div><!-- /container -->
+</main>
+
+<!-- ── FOOTER ──────────────────────────────────────────────────────────── -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand-name">Contratos<span>Express</span>.pro</div>
+        <p class="footer-tagline" data-t="footer.tagline">
+          Genera contratos y acuerdos de servicio profesionales en minutos.
+        </p>
+        <div class="footer-by">
+          <span data-t="footer.madeBy">Hecho con ♥ por</span>
+          <a href="https://molvicstudios.com/" target="_blank" rel="noopener noreferrer"> MolvicStudios</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title" data-t="footer.linksTitle">Más herramientas</div>
+        <nav class="footer-links" aria-label="Herramientas MolvicStudios">
+          <a href="https://propuestas.pro/" target="_blank" rel="noopener noreferrer" data-t="footer.promo.proposals">Propuestas comerciales → Propuestas.pro</a>
+          <a href="https://cvgenio.pro/" target="_blank" rel="noopener noreferrer" data-t="footer.promo.cv">Tu CV profesional → CVgenio.pro</a>
+          <a href="https://promptgenius.pro/" target="_blank" rel="noopener noreferrer" data-t="footer.promo.prompts">Genera prompts → PromptGenius.pro</a>
+          <a href="https://iafacil.help/" target="_blank" rel="noopener noreferrer" data-t="footer.promo.ai">Aprende sobre IA → iafacil.help</a>
+          <a href="https://prospectly.app/" target="_blank" rel="noopener noreferrer" data-t="footer.promo.prospectly">¿Más clientes? → Prospectly</a>
+        </nav>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Legal</div>
+        <nav class="footer-links" aria-label="Legal">
+          <a href="privacy.html" data-t="legal.privacyLink">Política de Privacidad</a>
+          <a href="cookies.html" data-t="legal.cookiesLink">Política de Cookies</a>
+          <a href="https://molvicstudios.com/" target="_blank" rel="noopener noreferrer">MolvicStudios.com</a>
+        </nav>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span class="footer-rights" data-t="footer.rights">© 2025 MolvicStudios. Todos los derechos reservados.</span>
+      <div class="footer-legal-links">
+        <a href="privacy.html" data-t="legal.privacyLink">Política de Privacidad</a>
+        <a href="cookies.html" data-t="legal.cookiesLink">Política de Cookies</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ── COOKIE BANNER ────────────────────────────────────────────────────── -->
+<div class="cookie-banner" id="cookie-banner" role="dialog" aria-label="Aviso de cookies">
+  <div class="cookie-banner-content">
+    <p id="cookie-banner-text" data-t="cookies.text">
+      Utilizamos cookies propias y de terceros (Google AdSense) para mostrar publicidad personalizada. Al continuar navegando, aceptas su uso.
+    </p>
+    <div class="cookie-actions">
+      <button class="btn-cookie-accept" id="btn-cookie-accept" type="button" data-t="cookies.accept">Aceptar</button>
+      <a href="cookies.html" class="btn-cookie-info" data-t="cookies.moreInfo">Más información</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── PANELS ───────────────────────────────────────────────────────────── -->
+<!-- History Panel -->
+<div class="panel-overlay" id="overlay-history" role="dialog" aria-modal="true" aria-labelledby="history-panel-title">
+  <div class="panel-box">
+    <div class="panel-header">
+      <div>
+        <div class="panel-title" id="history-panel-title" data-t="history.title">📜 Historial de Contratos</div>
+        <div class="panel-subtitle" data-t="history.subtitle">Últimos 10 contratos generados en este dispositivo</div>
+      </div>
+      <button class="panel-close" id="btn-close-history" type="button" aria-label="Cerrar historial">✕</button>
+    </div>
+    <div class="panel-body">
+      <div class="history-list" id="history-list"></div>
+    </div>
+    <div class="panel-footer">
+      <button class="btn btn-danger btn-sm" id="btn-clear-history" type="button" data-t="history.clearAll">Borrar todo el historial</button>
+    </div>
+  </div>
+</div>
+
+<!-- Favorites Panel -->
+<div class="panel-overlay" id="overlay-favorites" role="dialog" aria-modal="true" aria-labelledby="favorites-panel-title">
+  <div class="panel-box">
+    <div class="panel-header">
+      <div>
+        <div class="panel-title" id="favorites-panel-title" data-t="favorites.title">⭐ Contratos Favoritos</div>
+        <div class="panel-subtitle" data-t="favorites.subtitle">Contratos que has marcado con ★</div>
+      </div>
+      <button class="panel-close" id="btn-close-favorites" type="button" aria-label="Cerrar favoritos">✕</button>
+    </div>
+    <div class="panel-body">
+      <div class="history-list" id="favorites-list"></div>
+    </div>
+    <div class="panel-footer">
+      <button class="btn btn-danger btn-sm" id="btn-clear-favorites" type="button" data-t="favorites.clearAll">Borrar todos los favoritos</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="error-toast" id="error-toast" role="alert" aria-live="assertive"></div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
