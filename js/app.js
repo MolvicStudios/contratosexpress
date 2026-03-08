@@ -152,6 +152,11 @@ function renderContractTypeCards() {
       <div class="contract-card-desc">${t(descKey)}</div>
     `;
     card.addEventListener('click', () => selectContractType(key));
+    card.setAttribute('role', 'listitem');
+    card.setAttribute('tabindex', '0');
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectContractType(key); }
+    });
     grid.appendChild(card);
   });
 }
@@ -173,11 +178,26 @@ function initModeSelector() {
     state.mode = mode;
     modeOnline.classList.toggle('selected',  mode === 'online');
     modeOffline.classList.toggle('selected', mode === 'offline');
+    modeOnline?.setAttribute('aria-checked',  mode === 'online'  ? 'true' : 'false');
+    modeOffline?.setAttribute('aria-checked', mode === 'offline' ? 'true' : 'false');
     apiPanel?.classList.toggle('hidden-panel', mode !== 'online');
   }
 
   modeOnline?.addEventListener('click',  () => selectMode('online'));
   modeOffline?.addEventListener('click', () => selectMode('offline'));
+
+  // Keyboard navigation for mode cards
+  modeOnline?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectMode('online'); }
+  });
+  modeOffline?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectMode('offline'); }
+  });
+
+  // Añadir role="radiogroup" al contenedor de modo
+  modeOnline?.parentElement?.setAttribute('role', 'radiogroup');
+  modeOnline?.setAttribute('aria-checked', 'false');
+  modeOffline?.setAttribute('aria-checked', 'true');
 
   // default
   selectMode('offline');
@@ -269,8 +289,24 @@ function updateProgressBar() {
   $$('.progress-step').forEach((el, i) => {
     const stepNum = i + 1;
     el.classList.remove('active', 'done');
-    if (stepNum === state.currentStep) el.classList.add('active');
-    else if (stepNum < state.currentStep) el.classList.add('done');
+    if (stepNum === state.currentStep) {
+      el.classList.add('active');
+      el.removeAttribute('tabindex');
+      el.style.cursor = 'default';
+    } else if (stepNum < state.currentStep) {
+      el.classList.add('done');
+      el.tabIndex = 0;
+      el.style.cursor = 'pointer';
+      // Asignar listener solo una vez
+      if (!el._navBound) {
+        el._navBound = true;
+        const sn = stepNum;
+        el.addEventListener('click', () => goToStep(sn));
+        el.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); goToStep(sn); }
+        });
+      }
+    }
   });
 
   const label = $('#progress-label');
@@ -894,6 +930,13 @@ function showResult(contract, isAI) {
 
   // Save to history
   addToHistory(contract, isAI);
+
+  // Mostrar ad post-resultado y sticky footer ad
+  const adPostResult = $('#ad-slot-postresult');
+  if (adPostResult) adPostResult.style.display = 'block';
+  if (window._adsenseLoaded && adPostResult) {
+    try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (_) {}
+  }
 }
 
 function updateFavoriteBtn() {
@@ -904,6 +947,29 @@ function updateFavoriteBtn() {
 
 // ─── RESULT ACTION BUTTONS ───────────────────────────────────────────────────
 function initResultActions() {
+  // ── Download dropdown toggle
+  const dlToggle = $('#btn-download-toggle');
+  const dlDropdown = $('#download-dropdown');
+  if (dlToggle && dlDropdown) {
+    dlToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = dlDropdown.classList.toggle('open');
+      dlToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    // Cerrar al clicar fuera
+    document.addEventListener('click', () => {
+      dlDropdown.classList.remove('open');
+      dlToggle.setAttribute('aria-expanded', 'false');
+    });
+    // Cerrar con ESC
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        dlDropdown.classList.remove('open');
+        dlToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
   $('#btn-copy')?.addEventListener('click', () => {
     if (!state.generatedContract) return;
     navigator.clipboard.writeText(state.generatedContract).then(() => {
@@ -1247,7 +1313,7 @@ function getHistory() {
   try { return JSON.parse(localStorage.getItem(LS_HISTORY) || '[]'); } catch { return []; }
 }
 function saveHistory(arr) {
-  try { localStorage.setItem(LS_HISTORY, JSON.stringify(arr.slice(0, 10))); } catch {}
+  try { localStorage.setItem(LS_HISTORY, JSON.stringify(arr.slice(0, 50))); } catch {}
 }
 
 function addToHistory(contract, isAI) {
@@ -1427,11 +1493,48 @@ function initCookieBanner() {
   if (!banner) return;
   if (!localStorage.getItem(LS_COOKIES)) {
     banner.classList.add('visible');
+  } else {
+    // Ya aceptadas: cargar AdSense ahora
+    loadAdSense();
   }
   $('#btn-cookie-accept')?.addEventListener('click', () => {
     localStorage.setItem(LS_COOKIES, 'true');
     banner.classList.remove('visible');
+    loadAdSense();
   });
+}
+
+// ─── CARGA CONDICIONAL DE ADSENSE (solo tras consentimiento) ──────────────────
+function loadAdSense() {
+  if (window._adsenseLoaded) return;
+  window._adsenseLoaded = true;
+
+  const placeholder = document.getElementById('adsense-script');
+  if (!placeholder) return;
+
+  const src = placeholder.dataset.src;
+  if (!src) return;
+
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = src;
+  script.crossOrigin = 'anonymous';
+  document.head.appendChild(script);
+
+  script.onload = () => {
+    // Inicializar todos los ins.adsbygoogle presentes
+    try {
+      document.querySelectorAll('ins.adsbygoogle').forEach(() => {
+        (window.adsbygoogle = window.adsbygoogle || []).push({});
+      });
+    } catch (e) { /* ignorar errores de AdSense */ }
+
+    // Mostrar sticky footer ad en móvil
+    const stickyAd = document.getElementById('ad-sticky-footer');
+    if (stickyAd && window.innerWidth <= 768) {
+      stickyAd.style.display = 'flex';
+    }
+  };
 }
 
 // ─── EVENT DELEGATION FOR WIZARD INPUTS → LIVE PREVIEW ───────────────────────
@@ -1491,6 +1594,19 @@ function init() {
   $('#btn-hero-cta')?.addEventListener('click', () => {
     $('#contract-types-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
+
+  // Deep-link: ?type=services|freelance|nda|rental|employment
+  const urlType = new URLSearchParams(window.location.search).get('type');
+  if (urlType) {
+    const validTypes = ['services', 'freelance', 'nda', 'rental', 'employment',
+                        'sales', 'partnership', 'custom'];
+    if (validTypes.includes(urlType)) {
+      selectContractType(urlType);
+      setTimeout(() => {
+        $('#contract-types-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+  }
 
   console.log('ContratosExpress.pro initialized. by MolvicStudios');
 }

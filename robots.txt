@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /privacy.html
+Disallow: /cookies.html
+
+# Sitemap
+Sitemap: https://contratosexpress.pro/sitemap.xml

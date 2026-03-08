@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Página principal (bilingüe en la misma URL) -->
+  <url>
+    <loc>https://contratosexpress.pro/</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://contratosexpress.pro/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://contratosexpress.pro/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://contratosexpress.pro/"/>
+  </url>
+
+  <!-- Páginas SEO por tipo de contrato -->
+  <url>
+    <loc>https://contratosexpress.pro/contrato-servicios/</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://contratosexpress.pro/contrato-freelance/</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://contratosexpress.pro/nda-confidencialidad/</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://contratosexpress.pro/contrato-arrendamiento/</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://contratosexpress.pro/contrato-laboral/</loc>
+    <lastmod>2026-03-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>

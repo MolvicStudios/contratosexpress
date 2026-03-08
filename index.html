@@ -61,6 +61,64 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="alternate icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+  <!-- hreflang: bilingüe en la misma URL -->
+  <link rel="alternate" hreflang="es" href="https://contratosexpress.pro/">
+  <link rel="alternate" hreflang="en" href="https://contratosexpress.pro/">
+  <link rel="alternate" hreflang="x-default" href="https://contratosexpress.pro/">
+
+  <!-- Module preload para arranque más rápido -->
+  <link rel="modulepreload" href="js/app.js">
+  <link rel="modulepreload" href="js/translations.js">
+  <link rel="modulepreload" href="js/templates.js">
+
+  <!-- Google AdSense — se activa condicionalmente desde JS tras aceptar cookies -->
+  <script id="adsense-script" data-src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1513893788851225" data-crossorigin="anonymous"></script>
+
+  <!-- Schema.org: FAQPage para rich snippets en Google -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Es gratuito ContratosExpress.pro?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Sí, completamente gratuito. No requiere registro, suscripción ni tarjeta de crédito. Genera contratos profesionales sin coste." }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué tipos de contrato puedo generar?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Puedes generar 8 tipos: Prestación de Servicios, NDA (Confidencialidad), Contrato Freelance, Arrendamiento, Contrato Laboral, Acuerdo de Asociación, Compraventa y Personalizado." }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Es legal un contrato generado con IA?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Los contratos generados son plantillas orientativas y de referencia. Para que sean legalmente vinculantes en tu jurisdicción, te recomendamos revisarlos con un abogado colegiado. El documento es un excelente punto de partida." }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Mis datos se guardan en algún servidor?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. En el modo offline, todo el proceso ocurre 100% en tu navegador. En el modo online con Groq AI, los datos del formulario se envían directamente a la API de Groq (no a nuestros servidores). El historial y favoritos se guardan solo en el localStorage de tu dispositivo." }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Puedo descargar el contrato como PDF o Word?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Sí. Puedes descargar el contrato en formato .txt, .docx (Word) o exportarlo a PDF directamente desde la interfaz, sin necesidad de instalar ningún programa." }
+      },
+      {
+        "@type": "Question",
+        "name": "¿En qué idiomas está disponible?",
+        "acceptedAnswer": { "@type": "Answer", "text": "ContratosExpress.pro es completamente bilingüe: español e inglés. Puedes cambiar el idioma en cualquier momento con el botón EN/ES en la barra de navegación." }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
@@ -108,6 +166,49 @@
         <span data-t="hero.cta">Generar mi contrato</span>
       </button>
     </div>
+    <!-- Trust signals -->
+    <div class="trust-signals anim-fade-up anim-delay-4">
+      <div class="trust-item">⚡ <strong>2 minutos</strong> para completar</div>
+      <div class="trust-sep"></div>
+      <div class="trust-item">🔒 <strong>Sin registro</strong></div>
+      <div class="trust-sep"></div>
+      <div class="trust-item">💸 <strong>100% gratis</strong></div>
+      <div class="trust-sep"></div>
+      <div class="trust-item">🌍 <strong>ES / EN</strong> bilingüe</div>
+      <div class="trust-sep"></div>
+      <div class="trust-item">📥 Descarga en <strong>PDF · DOCX · TXT</strong></div>
+    </div>
+    <!-- Cómo funciona -->
+    <div class="how-it-works anim-fade-up anim-delay-4">
+      <div class="how-step">
+        <div class="how-step-num">1</div>
+        <div class="how-step-label" data-t="how.step1">Elige el tipo de contrato</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">2</div>
+        <div class="how-step-label" data-t="how.step2">Rellena los datos (≈2 min)</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">3</div>
+        <div class="how-step-label" data-t="how.step3">Genera con IA o plantilla</div>
+      </div>
+      <div class="how-step">
+        <div class="how-step-num">4</div>
+        <div class="how-step-label" data-t="how.step4">Descarga tu contrato</div>
+      </div>
+    </div>
+  </div>
+</header>
+      Generador de <span>Contratos</span> y Acuerdos con IA
+    </h1>
+    <p class="hero-subtitle anim-fade-up anim-delay-2" data-t="hero.subtitle">
+      Contratos profesionales en minutos. 8 tipos de contrato, bilingüe, gratis, sin registro.
+    </p>
+    <div class="hero-cta anim-fade-up anim-delay-3">
+      <button class="btn btn-primary btn-lg" id="btn-hero-cta">
+        <span data-t="hero.cta">Generar mi contrato</span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -124,6 +225,16 @@
     </section>
 
     <hr class="divider">
+
+    <!-- ── AD SLOT: IN-CONTENT (entre tipos y modo) ──────────────────── -->
+    <div class="ad-slot ad-slot-in-article" id="ad-slot-incontent" aria-hidden="true">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-1513893788851225"
+           data-ad-slot="auto"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+    </div>
 
     <!-- ── MODE SELECTOR ─────────────────────────────────────────────── -->
     <section id="mode-section" aria-labelledby="mode-title">
@@ -681,9 +792,17 @@
           <div class="result-actions">
             <button class="btn btn-ghost" id="btn-favorite" type="button" data-t="result.favoriteAdd">☆ Añadir a favoritos</button>
             <button class="btn btn-secondary" id="btn-copy" type="button" data-t="result.copyBtn">📋 Copiar</button>
-            <button class="btn btn-secondary" id="btn-download" type="button" data-t="result.downloadBtn">⬇ Descargar .txt</button>
-            <button class="btn btn-secondary" id="btn-download-docx" type="button" data-t="result.downloadDocxBtn">📝 Descargar .docx</button>
-            <button class="btn btn-secondary" id="btn-download-pdf" type="button" data-t="result.downloadPdfBtn">🖨 Exportar PDF</button>
+            <!-- Dropdown de descarga -->
+            <div class="dropdown-wrap">
+              <button class="btn btn-secondary" id="btn-download-toggle" type="button" aria-haspopup="true" aria-expanded="false">
+                ⬇ <span data-t="result.downloadBtn">Descargar</span> ▾
+              </button>
+              <div class="dropdown-menu" id="download-dropdown" role="menu">
+                <button class="dropdown-item" id="btn-download" type="button" role="menuitem">📄 .txt</button>
+                <button class="dropdown-item" id="btn-download-docx" type="button" role="menuitem">📝 .docx (Word)</button>
+                <button class="dropdown-item" id="btn-download-pdf" type="button" role="menuitem">🖨 PDF</button>
+              </div>
+            </div>
             <button class="btn btn-ghost" id="btn-regenerate" type="button" data-t="result.regenerateBtn">🔄 Regenerar</button>
             <button class="btn btn-secondary" id="btn-new-contract" type="button" data-t="result.newContractBtn">✚ Nuevo contrato</button>
           </div>
@@ -712,6 +831,80 @@
 
   </div><!-- /container -->
 </main>
+
+<!-- ── AD SLOT POST-RESULTADO ──────────────────────────────────────────── -->
+<div class="ad-slot ad-slot-banner" id="ad-slot-postresult" aria-hidden="true" style="display:none">
+  <div class="container">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-1513893788851225"
+         data-ad-slot="auto"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+  </div>
+</div>
+
+<!-- ── CROSS-SELL ─────────────────────────────────────────────────────── -->
+<section class="crosssell-section" id="crosssell-section" aria-label="Más herramientas">
+  <div class="container">
+    <p class="crosssell-title" data-t="crosssell.title">Más herramientas gratuitas de MolvicStudios</p>
+    <div class="crosssell-grid">
+      <a href="https://propuestas.pro/" target="_blank" rel="noopener noreferrer" class="crosssell-card">
+        <div class="crosssell-card-icon">📊</div>
+        <div class="crosssell-card-label" data-t="crosssell.proposals.label">Propuestas Comerciales</div>
+        <div class="crosssell-card-desc" data-t="crosssell.proposals.desc">Crea propuestas profesionales que convierten clientes</div>
+        <span class="crosssell-card-cta">Propuestas.pro →</span>
+      </a>
+      <a href="https://cvgenio.pro/" target="_blank" rel="noopener noreferrer" class="crosssell-card">
+        <div class="crosssell-card-icon">📄</div>
+        <div class="crosssell-card-label" data-t="crosssell.cv.label">Tu CV Profesional</div>
+        <div class="crosssell-card-desc" data-t="crosssell.cv.desc">Genera un currículum que destaque con IA</div>
+        <span class="crosssell-card-cta">CVgenio.pro →</span>
+      </a>
+      <a href="https://promptgenius.pro/" target="_blank" rel="noopener noreferrer" class="crosssell-card">
+        <div class="crosssell-card-icon">🤖</div>
+        <div class="crosssell-card-label" data-t="crosssell.prompts.label">Genera Prompts con IA</div>
+        <div class="crosssell-card-desc" data-t="crosssell.prompts.desc">Prompts optimizados para cualquier tarea de IA</div>
+        <span class="crosssell-card-cta">PromptGenius.pro →</span>
+      </a>
+      <a href="https://prospectly.app/" target="_blank" rel="noopener noreferrer" class="crosssell-card">
+        <div class="crosssell-card-icon">🎯</div>
+        <div class="crosssell-card-label" data-t="crosssell.prospectly.label">Consigue Más Clientes</div>
+        <div class="crosssell-card-desc" data-t="crosssell.prospectly.desc">Prospección inteligente de clientes potenciales</div>
+        <span class="crosssell-card-cta">Prospectly.app →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ SECTION ─────────────────────────────────────────────────────── -->
+<section class="faq-section" id="faq-section" aria-labelledby="faq-title">
+  <div class="container">
+    <h2 class="section-title" id="faq-title" style="text-align:center" data-t="faq.title">Preguntas frecuentes</h2>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary data-t="faq.q1">¿Es gratuito ContratosExpress.pro?</summary>
+        <div class="faq-item-body" data-t="faq.a1">Sí, completamente gratuito. No requiere registro, suscripción ni tarjeta de crédito.</div>
+      </details>
+      <details class="faq-item">
+        <summary data-t="faq.q2">¿Qué tipos de contrato puedo generar?</summary>
+        <div class="faq-item-body" data-t="faq.a2">8 tipos: Prestación de Servicios, NDA, Freelance, Arrendamiento, Laboral, Asociación, Compraventa y Personalizado.</div>
+      </details>
+      <details class="faq-item">
+        <summary data-t="faq.q3">¿Es legal un contrato generado con IA?</summary>
+        <div class="faq-item-body" data-t="faq.a3">Los contratos son plantillas orientativas. Para que sean vinculantes en tu jurisdicción, te recomendamos revisarlos con un abogado colegiado.</div>
+      </details>
+      <details class="faq-item">
+        <summary data-t="faq.q4">¿Mis datos se guardan en algún servidor?</summary>
+        <div class="faq-item-body" data-t="faq.a4">No. En modo offline todo ocurre en tu navegador. En modo online los datos van directamente a la API de Groq. El historial se guarda solo en tu dispositivo.</div>
+      </details>
+      <details class="faq-item">
+        <summary data-t="faq.q5">¿Puedo descargar el contrato como PDF o Word?</summary>
+        <div class="faq-item-body" data-t="faq.a5">Sí. Puedes descargar en .txt, .docx (Word) o exportar a PDF directamente desde la interfaz.</div>
+      </details>
+    </div>
+  </div>
+</section>
 
 <!-- ── FOOTER ──────────────────────────────────────────────────────────── -->
 <footer class="footer" role="contentinfo">
@@ -779,7 +972,7 @@
     <div class="panel-header">
       <div>
         <div class="panel-title" id="history-panel-title" data-t="history.title">📜 Historial de Contratos</div>
-        <div class="panel-subtitle" data-t="history.subtitle">Últimos 10 contratos generados en este dispositivo</div>
+        <div class="panel-subtitle" data-t="history.subtitle">Últimos 50 contratos generados en este dispositivo</div>
       </div>
       <button class="panel-close" id="btn-close-history" type="button" aria-label="Cerrar historial">✕</button>
     </div>
@@ -813,6 +1006,14 @@
 
 <!-- Toast -->
 <div class="error-toast" id="error-toast" role="alert" aria-live="assertive"></div>
+
+<!-- ── STICKY FOOTER AD (móvil) ────────────────────────────────────────── -->
+<div class="ad-sticky-footer" id="ad-sticky-footer" aria-hidden="true">
+  <ins class="adsbygoogle"
+       style="display:inline-block;width:320px;height:50px"
+       data-ad-client="ca-pub-1513893788851225"
+       data-ad-slot="auto"></ins>
+</div>
 
 <script type="module" src="js/app.js"></script>
 </body>
