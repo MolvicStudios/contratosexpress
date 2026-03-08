@@ -71,6 +71,14 @@ function formatDateShort(isoStr) {
   }
 }
 
+function escapeHtml(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
 // ─── TRANSLATIONS / LANG ────────────────────────────────────────────────────
 function applyTranslations() {
   $$('[data-t]').forEach(el => {
@@ -938,6 +946,14 @@ function initResultActions() {
     URL.revokeObjectURL(url);
   });
 
+  $('#btn-download-docx')?.addEventListener('click', () => {
+    downloadDocx();
+  });
+
+  $('#btn-download-pdf')?.addEventListener('click', () => {
+    downloadPdf();
+  });
+
   $('#btn-regenerate')?.addEventListener('click', () => {
     handleGenerate();
   });
@@ -965,6 +981,219 @@ function initResultActions() {
       if (pre) pre.textContent = modified;
     });
   });
+}
+
+// ─── EXPORT: DOCX ───────────────────────────────────────────────────────────
+async function downloadDocx() {
+  if (!state.generatedContract) return;
+
+  const btn = $('#btn-download-docx');
+  const origText = btn?.textContent;
+  if (btn) btn.textContent = t('result.exportingDocx');
+
+  try {
+    // Lazy-load docx library from CDN
+    if (!window.docx) {
+      await new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/docx@8/build/index.min.js';
+        script.onload = resolve;
+        script.onerror = () => reject(new Error('docx lib failed to load'));
+        document.head.appendChild(script);
+      });
+    }
+
+    const { Document, Packer, Paragraph, TextRun, HeadingLevel,
+            ImageRun, AlignmentType, BorderStyle, ShadingType } = window.docx;
+
+    const children = [];
+
+    // Logo
+    if (state.logoDataUrl && !state.logoDataUrl.includes('svg')) {
+      try {
+        const base64 = state.logoDataUrl.split(',')[1];
+        const imgType = state.logoDataUrl.startsWith('data:image/png') ? 'png' : 'jpg';
+        const binary = atob(base64);
+        const bytes = new Uint8Array(binary.length);
+        for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+        children.push(new Paragraph({
+          children: [new ImageRun({
+            data: bytes.buffer,
+            transformation: { width: 160, height: 60 },
+            type: imgType,
+          })],
+          alignment: AlignmentType.LEFT,
+          spacing: { after: 200 },
+        }));
+      } catch (_) { /* skip logo if error */ }
+    }
+
+    // Contract lines
+    const lines = state.generatedContract.split('\n');
+    for (const line of lines) {
+      const trimmed = line.trim();
+      const isAllCaps = trimmed.length > 3 && trimmed.length < 80
+        && trimmed === trimmed.toUpperCase() && /[A-ZÁÉÍÓÚÑ]/.test(trimmed);
+      const isSeparator = /^[─═=\-]{3,}$/.test(trimmed);
+
+      if (isSeparator) {
+        children.push(new Paragraph({ text: '', spacing: { after: 80 } }));
+      } else if (isAllCaps && trimmed.length > 0) {
+        children.push(new Paragraph({
+          children: [new TextRun({ text: trimmed, bold: true, size: 24 })],
+          heading: HeadingLevel.HEADING_2,
+          spacing: { before: 240, after: 80 },
+        }));
+      } else {
+        children.push(new Paragraph({
+          children: [new TextRun({ text: line, size: 22 })],
+          spacing: { after: 60 },
+        }));
+      }
+    }
+
+    // Footer
+    children.push(new Paragraph({ text: '', spacing: { before: 400 } }));
+    children.push(new Paragraph({
+      children: [new TextRun({
+        text: 'Generado con ContratosExpress.pro · by MolvicStudios · https://contratosexpress.pro/',
+        color: '888888',
+        italics: true,
+        size: 16,
+      })],
+    }));
+
+    const doc = new Document({
+      creator: 'ContratosExpress.pro by MolvicStudios',
+      title: `ContratosExpress — ${state.contractType || 'contrato'}`,
+      sections: [{
+        properties: {},
+        children,
+      }],
+    });
+
+    const blob = await Packer.toBlob(doc);
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    const typeName = state.contractType || 'contrato';
+    const party1   = state.formData.party1Name?.replace(/[^a-z0-9]/gi, '_').substring(0, 20) || '';
+    a.download = `ContratosExpress_${typeName}_${party1}_${Date.now()}.docx`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  } catch (err) {
+    console.error('DOCX export error:', err);
+    showToast(state.lang === 'es'
+      ? 'Error al generar el .docx. Inténtalo de nuevo.'
+      : 'Error generating .docx. Please try again.');
+  } finally {
+    if (btn && origText) btn.textContent = origText;
+  }
+}
+
+// ─── EXPORT: PDF ─────────────────────────────────────────────────────────────
+function downloadPdf() {
+  if (!state.generatedContract) return;
+
+  const btn = $('#btn-download-pdf');
+  const origText = btn?.textContent;
+  if (btn) btn.textContent = t('result.exportingPdf');
+
+  const typeName = (state.contractType || 'contrato').toUpperCase();
+  const logoHtml = (state.logoDataUrl && !state.logoDataUrl.includes('svg+xml;base64,'))
+    ? `<div class="logo-wrap"><img src="${state.logoDataUrl}" alt="Logo"></div>`
+    : '';
+
+  const contractHtml = escapeHtml(state.generatedContract)
+    .replace(/─{3,}|={3,}/g, '<hr>')
+    .replace(/\n/g, '<br>');
+
+  const htmlContent = `<!DOCTYPE html>
+<html lang="${state.lang}">
+<head>
+  <meta charset="UTF-8">
+  <title>${escapeHtml(typeName)} — ContratosExpress.pro</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Georgia', 'Times New Roman', Times, serif;
+      font-size: 11pt;
+      line-height: 1.7;
+      color: #111;
+      background: #fff;
+      padding: 40px 56px;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .logo-wrap {
+      margin-bottom: 24px;
+    }
+    .logo-wrap img {
+      max-height: 80px;
+      max-width: 220px;
+      object-fit: contain;
+      display: block;
+    }
+    .contract-body {
+      white-space: pre-wrap;
+      word-break: break-word;
+      font-size: 11pt;
+    }
+    hr {
+      border: none;
+      border-top: 1px solid #ccc;
+      margin: 16px 0;
+    }
+    .footer {
+      margin-top: 40px;
+      padding-top: 12px;
+      border-top: 1px solid #ddd;
+      font-size: 8pt;
+      color: #888;
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+    @media print {
+      body { padding: 0; font-size: 10.5pt; }
+      @page { margin: 22mm 18mm; }
+      .footer { position: fixed; bottom: 0; width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  ${logoHtml}
+  <div class="contract-body">${contractHtml}</div>
+  <div class="footer">ContratosExpress.pro &middot; by MolvicStudios &middot; Documento de orientaci&oacute;n, no constituye asesoramiento legal</div>
+  <script>
+    window.addEventListener('load', function() {
+      setTimeout(function() { window.print(); }, 300);
+    });
+  <\/script>
+</body>
+</html>`;
+
+  const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+  const url  = URL.createObjectURL(blob);
+  const win  = window.open(url, '_blank');
+
+  if (!win) {
+    // Popup blocked — download as HTML fallback
+    const a = document.createElement('a');
+    a.href = url;
+    const party1 = state.formData.party1Name?.replace(/[^a-z0-9]/gi, '_').substring(0, 20) || '';
+    a.download = `ContratosExpress_${state.contractType || 'contrato'}_${party1}.html`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    showToast(state.lang === 'es'
+      ? 'Popups bloqueados. Descargando como HTML — ábrelo con Chrome y usa Ctrl+P para imprimir como PDF.'
+      : 'Popups blocked. Downloading as HTML — open it in Chrome and use Ctrl+P to print as PDF.');
+  }
+
+  setTimeout(() => URL.revokeObjectURL(url), 30000);
+  if (btn && origText) setTimeout(() => { btn.textContent = origText; }, 1000);
 }
 
 function resetAll() {
