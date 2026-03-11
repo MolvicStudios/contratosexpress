@@ -1553,6 +1553,7 @@ body::before {
 /* ── AD SLOTS (reserva de espacio anti-CLS) ────────────────────── */
 .ad-slot {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
@@ -1563,6 +1564,28 @@ body::before {
 .ad-slot-rect     { min-height: 250px; }
 .ad-slot-mobile   { min-height: 60px; }
 .ad-slot-in-article { min-height: 90px; margin: var(--space-xl) 0; }
+
+/* Etiqueta legal "Publicidad" — cumplimiento AdSense + LSSI Art.20 */
+.ad-label {
+  display: block;
+  width: 100%;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 2px 0 3px;
+  line-height: 1;
+  order: -1;
+}
+.ad-sticky-footer .ad-label {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  right: 0;
+  font-size: 0.5rem;
+}
 
 /* Sticky footer ad — móvil solamente */
 .ad-sticky-footer {

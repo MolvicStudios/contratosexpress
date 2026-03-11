@@ -937,6 +937,17 @@ function showResult(contract, isAI) {
   if (window._adsenseLoaded && adPostResult) {
     try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (_) {}
   }
+
+  // Sugerencia de marcador — una sola vez por sesión
+  if (!sessionStorage.getItem('ce_bookmark_shown')) {
+    sessionStorage.setItem('ce_bookmark_shown', '1');
+    setTimeout(() => showToast(
+      state.lang === 'es'
+        ? '💡 ¿Volverás a necesitar un contrato? Guárdalo en marcadores (Ctrl+D / ⌘+D)'
+        : '💡 Need another contract? Bookmark this page (Ctrl+D / ⌘+D)',
+      'success'
+    ), 3000);
+  }
 }
 
 function updateFavoriteBtn() {
@@ -1493,6 +1504,7 @@ function initCookieBanner() {
   if (!banner) return;
   if (!localStorage.getItem(LS_COOKIES)) {
     banner.classList.add('visible');
+    setTimeout(() => $('#btn-cookie-accept')?.focus(), 100);
   } else {
     // Ya aceptadas: cargar AdSense ahora
     loadAdSense();
