@@ -29,9 +29,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/styles.css">
 
-  <!-- Google AdSense — cargado condicionalmente tras consentimiento de cookies (GDPR) -->
-  <script id="adsense-script" data-src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1513893788851225"></script>
-
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -91,6 +88,169 @@
     ]
   }
   </script>
+
+  <!-- InMobi Choice. Consent Manager Tag v3.0 (for TCF 2.3) -->
+  <script type="text/javascript" async=true>
+  (function() {
+    var host = "www.themoneytizer.com";
+    var element = document.createElement('script');
+    var firstScript = document.getElementsByTagName('script')[0];
+    var url = 'https://cmp.inmobi.com'
+      .concat('/choice/', '6Fv0cGNfc_bw8', '/', host, '/choice.js?tag_version=V3');
+    var uspTries = 0;
+    var uspTriesLimit = 3;
+    element.async = true;
+    element.type = 'text/javascript';
+    element.src = url;
+
+    firstScript.parentNode.insertBefore(element, firstScript);
+
+    function makeStub() {
+      var TCF_LOCATOR_NAME = '__tcfapiLocator';
+      var queue = [];
+      var win = window;
+      var cmpFrame;
+
+      function addFrame() {
+        var doc = win.document;
+        var otherCMP = !!(win.frames[TCF_LOCATOR_NAME]);
+
+        if (!otherCMP) {
+          if (doc.body) {
+            var iframe = doc.createElement('iframe');
+
+            iframe.style.cssText = 'display:none';
+            iframe.name = TCF_LOCATOR_NAME;
+            doc.body.appendChild(iframe);
+          } else {
+            setTimeout(addFrame, 5);
+          }
+        }
+        return !otherCMP;
+      }
+
+      function tcfAPIHandler() {
+        var gdprApplies;
+        var args = arguments;
+
+        if (!args.length) {
+          return queue;
+        } else if (args[0] === 'setGdprApplies') {
+          if (
+            args.length > 3 &&
+            args[2] === 2 &&
+            typeof args[3] === 'boolean'
+          ) {
+            gdprApplies = args[3];
+            if (typeof args[2] === 'function') {
+              args[2]('set', true);
+            }
+          }
+        } else if (args[0] === 'ping') {
+          var retr = {
+            gdprApplies: gdprApplies,
+            cmpLoaded: false,
+            cmpStatus: 'stub'
+          };
+
+          if (typeof args[2] === 'function') {
+            args[2](retr);
+          }
+        } else {
+          if(args[0] === 'init' && typeof args[3] === 'object') {
+            args[3] = Object.assign(args[3], { tag_version: 'V3' });
+          }
+          queue.push(args);
+        }
+      }
+
+      function postMessageEventHandler(event) {
+        var msgIsString = typeof event.data === 'string';
+        var json = {};
+
+        try {
+          if (msgIsString) {
+            json = JSON.parse(event.data);
+          } else {
+            json = event.data;
+          }
+        } catch (ignore) {}
+
+        var payload = json.__tcfapiCall;
+
+        if (payload) {
+          window.__tcfapi(
+            payload.command,
+            payload.version,
+            function(retValue, success) {
+              var returnMsg = {
+                __tcfapiReturn: {
+                  returnValue: retValue,
+                  success: success,
+                  callId: payload.callId
+                }
+              };
+              if (msgIsString) {
+                returnMsg = JSON.stringify(returnMsg);
+              }
+              if (event && event.source && event.source.postMessage) {
+                event.source.postMessage(returnMsg, '*');
+              }
+            },
+            payload.parameter
+          );
+        }
+      }
+
+      while (win) {
+        try {
+          if (win.frames[TCF_LOCATOR_NAME]) {
+            cmpFrame = win;
+            break;
+          }
+        } catch (ignore) {}
+
+        if (win === window.top) {
+          break;
+        }
+        win = win.parent;
+      }
+      if (!cmpFrame) {
+        addFrame();
+        win.__tcfapi = tcfAPIHandler;
+        win.addEventListener('message', postMessageEventHandler, false);
+      }
+    };
+
+    makeStub();
+
+    var uspStubFunction = function() {
+      var arg = arguments;
+      if (typeof window.__uspapi !== uspStubFunction) {
+        setTimeout(function() {
+          if (typeof window.__uspapi !== 'undefined') {
+            window.__uspapi.apply(window.__uspapi, arg);
+          }
+        }, 500);
+      }
+    };
+
+    var checkIfUspIsReady = function() {
+      uspTries++;
+      if (window.__uspapi === uspStubFunction && uspTries < uspTriesLimit) {
+        console.warn('USP is not accessible');
+      } else {
+        clearInterval(uspInterval);
+      }
+    };
+
+    if (typeof window.__uspapi === 'undefined') {
+      window.__uspapi = uspStubFunction;
+      var uspInterval = setInterval(checkIfUspIsReady, 6000);
+    }
+  })();
+  </script>
+  <!-- End InMobi Choice. Consent Manager Tag v3.0 (for TCF 2.3) -->
 </head>
 <body>
 
@@ -114,17 +274,6 @@
 
       <h1>Contrato Laboral — Plantilla Gratis</h1>
       <p class="legal-date">Plantilla actualizada: marzo 2026 · Genera tu contrato de trabajo personalizado gratis y sin registro</p>
-
-      <!-- Ad slot superior -->
-      <div class="ad-slot ad-slot-banner" aria-hidden="true" style="margin: 24px 0;">
-        <div class="ad-label">Publicidad</div>
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-1513893788851225"
-             data-ad-slot="7933598081"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-      </div>
 
       <h2>¿Qué es un contrato laboral?</h2>
       <p>Un <strong>contrato laboral o contrato de trabajo</strong> es el acuerdo entre un empleador y un trabajador por el que éste se obliga a prestar servicios retribuidos bajo la dirección del empresario. En España se rige por el <strong>Estatuto de los Trabajadores</strong> y los convenios colectivos aplicables.</p>
@@ -151,17 +300,6 @@
         <li>Indicación del convenio colectivo aplicable</li>
       </ul>
 
-      <!-- Ad slot in-content -->
-      <div class="ad-slot ad-slot-in-article" aria-hidden="true">
-        <div class="ad-label">Publicidad</div>
-        <ins class="adsbygoogle"
-             style="display:block; text-align:center;"
-             data-ad-layout="in-article"
-             data-ad-format="fluid"
-             data-ad-client="ca-pub-1513893788851225"
-             data-ad-slot="7933598081"></ins>
-      </div>
-
       <h2>Genera tu contrato de trabajo ahora — gratis</h2>
       <p>Con <strong>ContratosExpress.pro</strong> puedes generar un contrato laboral completo en minutos. El modo IA permite especificar el tipo de contrato, convenio aplicable, pacto de no competencia, cláusulas de teletrabajo y cualquier condición especial.</p>
 
@@ -181,17 +319,6 @@
 
       <h3>¿Sirve para México, Colombia y otros países de Latinoamérica?</h3>
       <p>Sí. El generador adapta el contrato laboral a la legislación del país indicado. La Ley Federal del Trabajo (México), el Código Sustantivo del Trabajo (Colombia) o el Código del Trabajo (Chile) son algunos de los marcos que el modo IA puede contemplar.</p>
-
-      <!-- Ad slot bottom of content -->
-      <div class="ad-slot ad-slot-banner" aria-hidden="true" style="margin: 32px 0 0 0;">
-        <div class="ad-label">Publicidad</div>
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-1513893788851225"
-             data-ad-slot="7933598081"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-      </div>
 
     </div>
   </div>
@@ -233,60 +360,6 @@
     </div>
   </div>
 </footer>
-
-<!-- Sticky footer ad (móvil) -->
-<div class="ad-sticky-footer" id="ad-sticky-footer" aria-hidden="true" style="display:none; position:relative;">
-  <div class="ad-label">Publicidad</div>
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-1513893788851225"
-       data-ad-slot="7933598081"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-</div>
-
-<!-- Cookie banner (GDPR) -->
-<div class="cookie-banner" id="cookie-banner" role="dialog" aria-modal="true" aria-label="Aviso de cookies">
-  <div class="cookie-banner-inner">
-    <p class="cookie-text">Usamos cookies propias y de terceros (Google AdSense) para mostrarte publicidad personalizada. <a href="/cookies.html">Más información</a>.</p>
-    <div class="cookie-buttons">
-      <button id="btn-cookie-accept" class="btn btn-primary">Aceptar</button>
-      <a href="/privacy.html" class="btn btn-ghost">Rechazar</a>
-    </div>
-  </div>
-</div>
-
-<script>(function(){
-  function loadAds(){
-    if(window._adsLoaded)return; window._adsLoaded=true;
-    var el=document.getElementById('adsense-script');
-    if(!el)return;
-    var s=document.createElement('script');
-    s.async=true; s.crossOrigin='anonymous'; s.src=el.dataset.src;
-    document.head.appendChild(s);
-    s.onload=function(){
-      document.querySelectorAll('ins.adsbygoogle').forEach(function(){
-        (window.adsbygoogle=window.adsbygoogle||[]).push({});
-      });
-      var sf=document.getElementById('ad-sticky-footer');
-      if(sf&&window.innerWidth<=768)sf.style.display='flex';
-    };
-  }
-  document.addEventListener('DOMContentLoaded',function(){
-    if(localStorage.getItem('cookies_accepted')){
-      loadAds();
-    } else {
-      var b=document.getElementById('cookie-banner');
-      var btn=document.getElementById('btn-cookie-accept');
-      if(b){b.classList.add('visible');setTimeout(function(){if(btn)btn.focus();},100);}
-      if(btn)btn.addEventListener('click',function(){
-        localStorage.setItem('cookies_accepted','true');
-        b.classList.remove('visible');
-        loadAds();
-      });
-    }
-  });
-})();</script>
 
 </body>
 </html>

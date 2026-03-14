@@ -214,7 +214,7 @@ export const translations = {
       cookiesLink: 'Política de Cookies',
     },
     cookies: {
-      text: 'Utilizamos cookies propias y de terceros (Google AdSense) para mostrar publicidad personalizada. Al continuar navegando, aceptas su uso.',
+      text: 'Utilizamos cookies propias y de terceros para mostrar publicidad personalizada. Al continuar navegando, aceptas su uso.',
       accept: 'Aceptar',
       moreInfo: 'Más información',
     },
@@ -464,7 +464,7 @@ export const translations = {
       cookiesLink: 'Cookie Policy',
     },
     cookies: {
-      text: 'We use our own and third-party cookies (Google AdSense) to display personalized advertising. By continuing to browse, you accept their use.',
+      text: 'We use our own and third-party cookies to display personalized advertising. By continuing to browse, you accept their use.',
       accept: 'Accept',
       moreInfo: 'More information',
     },

@@ -931,13 +931,6 @@ function showResult(contract, isAI) {
   // Save to history
   addToHistory(contract, isAI);
 
-  // Mostrar ad post-resultado y sticky footer ad
-  const adPostResult = $('#ad-slot-postresult');
-  if (adPostResult) adPostResult.style.display = 'block';
-  if (window._adsenseLoaded && adPostResult) {
-    try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch (_) {}
-  }
-
   // Sugerencia de marcador — una sola vez por sesión
   if (!sessionStorage.getItem('ce_bookmark_shown')) {
     sessionStorage.setItem('ce_bookmark_shown', '1');
@@ -1505,48 +1498,11 @@ function initCookieBanner() {
   if (!localStorage.getItem(LS_COOKIES)) {
     banner.classList.add('visible');
     setTimeout(() => $('#btn-cookie-accept')?.focus(), 100);
-  } else {
-    // Ya aceptadas: cargar AdSense ahora
-    loadAdSense();
   }
   $('#btn-cookie-accept')?.addEventListener('click', () => {
     localStorage.setItem(LS_COOKIES, 'true');
     banner.classList.remove('visible');
-    loadAdSense();
   });
-}
-
-// ─── CARGA CONDICIONAL DE ADSENSE (solo tras consentimiento) ──────────────────
-function loadAdSense() {
-  if (window._adsenseLoaded) return;
-  window._adsenseLoaded = true;
-
-  const placeholder = document.getElementById('adsense-script');
-  if (!placeholder) return;
-
-  const src = placeholder.dataset.src;
-  if (!src) return;
-
-  const script = document.createElement('script');
-  script.async = true;
-  script.src = src;
-  script.crossOrigin = 'anonymous';
-  document.head.appendChild(script);
-
-  script.onload = () => {
-    // Inicializar todos los ins.adsbygoogle presentes
-    try {
-      document.querySelectorAll('ins.adsbygoogle').forEach(() => {
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
-      });
-    } catch (e) { /* ignorar errores de AdSense */ }
-
-    // Mostrar sticky footer ad en móvil
-    const stickyAd = document.getElementById('ad-sticky-footer');
-    if (stickyAd && window.innerWidth <= 768) {
-      stickyAd.style.display = 'flex';
-    }
-  };
 }
 
 // ─── EVENT DELEGATION FOR WIZARD INPUTS → LIVE PREVIEW ───────────────────────
